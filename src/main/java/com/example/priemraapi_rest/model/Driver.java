@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDate;
+import java.util.Set;
 
 @Entity
 @Data
@@ -23,4 +24,12 @@ public class Driver {
     private LocalDate dob;
     private String nationality;
     private String url;
+    @ManyToOne
+    @JoinColumn(name = "constructorid")
+    private Constructor constructor;
+    @ManyToMany
+    @JoinTable(name = "results",
+    joinColumns = @JoinColumn (name = "driverid"),
+    inverseJoinColumns = @JoinColumn(name = "raceid"))
+    private Set<Race> races;
 }
