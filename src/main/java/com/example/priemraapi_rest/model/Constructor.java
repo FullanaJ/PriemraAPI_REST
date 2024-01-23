@@ -22,7 +22,7 @@ public class Constructor {
     private String name;
     private String nationality;
     private String url;
-    @OneToMany(mappedBy = "constructor")
+    @OneToMany(mappedBy = "constructor",cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JsonIgnoreProperties
     private Set<Driver> driver;
 

@@ -1,5 +1,7 @@
 package com.example.priemraapi_rest.service;
 
+import com.example.priemraapi_rest.DTO.DriverDTO;
+import com.example.priemraapi_rest.maper.DriverMapper;
 import com.example.priemraapi_rest.model.Driver;
 import com.example.priemraapi_rest.repository.DriverRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,19 +14,23 @@ import java.util.Optional;
 public class DriverServiceImpl implements DriverService {
 
     private final DriverRepository driverRepository;
+    private final DriverMapper driverMapper;
 
     @Autowired
-    public DriverServiceImpl(DriverRepository driverRepository) {
+    public DriverServiceImpl(DriverRepository driverRepository, DriverMapper driverMapper) {
         this.driverRepository = driverRepository;
+        this.driverMapper = driverMapper;
     }
 
     @Override
-    public List<Driver> getAllDrivers() {
-        return driverRepository.findAll();
+    public List<DriverDTO> getAllDrivers() {
+        return driverRepository.findAllDriverDTOInfo();
     }
-    public Optional<Driver> getDriverByCode(String code) {
-        return driverRepository.findByCodeIgnoreCase(code);
+    public Optional<DriverDTO> getDriverByCode(String code) {
+        return driverRepository.findByCodeIgnoreCase(code)
+                .map(driverMapper);
     }
+
 
     @Override
     public void saveDriver(Driver driver) {

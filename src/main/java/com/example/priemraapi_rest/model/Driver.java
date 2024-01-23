@@ -10,6 +10,7 @@ import java.util.Set;
 @Entity
 @Data
 @Table(name = "drivers")
+
 public class Driver {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,10 +25,10 @@ public class Driver {
     private LocalDate dob;
     private String nationality;
     private String url;
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "constructorid")
     private Constructor constructor;
-    @ManyToMany
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name = "results",
     joinColumns = @JoinColumn (name = "driverid"),
     inverseJoinColumns = @JoinColumn(name = "raceid"))

@@ -1,5 +1,6 @@
 package com.example.priemraapi_rest.controller;
 
+import com.example.priemraapi_rest.DTO.DriverDTO;
 import com.example.priemraapi_rest.model.Driver;
 import com.example.priemraapi_rest.service.DriverService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,12 +21,12 @@ public class DriverRestController {
     }
 
     @GetMapping("/drivers")
-    public ResponseEntity<List<Driver>> getAllDrivers() {
+    public ResponseEntity<List<DriverDTO>> getAllDrivers() {
         return ResponseEntity.ok(driveService.getAllDrivers());
     }
 
     @GetMapping("/drivers/{code}")
-    public ResponseEntity<Driver> getByCode(@PathVariable String code) {
+    public ResponseEntity<DriverDTO> getByCode(@PathVariable String code) {
         return this.driveService.getDriverByCode(code)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
