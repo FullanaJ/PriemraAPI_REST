@@ -3,6 +3,10 @@ package com.example.priemraapi_rest.service;
 import com.example.priemraapi_rest.model.Race;
 import com.example.priemraapi_rest.repository.RaceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,8 +26,10 @@ public class RaceServiceImpl implements RaceService{
     }
 
     @Override
-    public List<Race> getAllRaces() {
-        return raceRepository.findAll();
+    public Page<Race> getAllRacesPaged(int pageNo, int pageSize, String sortBy, String sortDirection) {
+        Sort sort = Sort.by(Sort.Direction.fromString(sortDirection), sortBy);
+        Pageable pageable = PageRequest.of(pageNo, pageSize, sort);
+        return raceRepository.findAll(pageable);
     }
 
 }

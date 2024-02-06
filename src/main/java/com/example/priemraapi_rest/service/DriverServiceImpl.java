@@ -24,6 +24,7 @@ public class DriverServiceImpl implements DriverService {
 
     @Override
     public List<DriverDTO> getAllDrivers() {
+
         return driverRepository.findAllDriverDTOInfo();
     }
     public Optional<DriverDTO> getDriverByCode(String code) {

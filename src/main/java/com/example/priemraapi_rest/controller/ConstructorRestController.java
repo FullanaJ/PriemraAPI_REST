@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -20,8 +21,13 @@ public class ConstructorRestController {
         this.constructorService = constructorService;
     }
     @GetMapping("/constructors")
-    public List<Constructor> getAllConstructors() {
-        return constructorService.getAllConstructors();
+    public List<Constructor> getAllConstructors(
+            @RequestParam(defaultValue = "0") Integer page,
+            @RequestParam(defaultValue = "10") Integer size,
+            @RequestParam(defaultValue = "name") String sortBy,
+            @RequestParam(defaultValue = "ASC") String sortDirection
+    ) {
+        return constructorService.getAllConstructorsPaged(page, size, sortBy, sortDirection).getContent();
     }
 
     @GetMapping("/constructors/{code}")

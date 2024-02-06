@@ -1,15 +1,11 @@
 package com.example.priemraapi_rest.controller;
 
-import com.example.priemraapi_rest.model.Driver;
 import com.example.priemraapi_rest.model.Race;
 import com.example.priemraapi_rest.service.RaceService;
-import com.example.priemraapi_rest.service.RaceServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -24,8 +20,13 @@ public class RaceRestController {
     }
 
     @GetMapping("/races")
-    public ResponseEntity<List<Race>> getAllRaces() {
-        return ResponseEntity.ok(raceService.getAllRaces());
+    public ResponseEntity<List<Race>> getAllRaces(
+            @RequestParam(defaultValue = "0") Integer page,
+            @RequestParam(defaultValue = "10") Integer size,
+            @RequestParam(defaultValue = "id") String sortBy,
+            @RequestParam(defaultValue = "ASC") String sortDirection) {
+        Page<Race> list = raceService.getAllRacesPaged(page, size, sortBy, sortDirection);
+        return ResponseEntity.ok(list.getContent());
     }
 
     @GetMapping("/races/{code}")
