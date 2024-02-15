@@ -2,6 +2,7 @@ package com.example.priemraapi_rest.controller;
 
 import com.example.priemraapi_rest.DTO.DriverDTO;
 import com.example.priemraapi_rest.model.Driver;
+import com.example.priemraapi_rest.projections.DriverResum;
 import com.example.priemraapi_rest.service.DriverService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +22,7 @@ public class DriverRestController {
     }
 
     @GetMapping("/drivers")
-    public ResponseEntity<List<DriverDTO>> getAllDrivers() {
+    public ResponseEntity<List<DriverResum>> getAllDrivers() {
         return ResponseEntity.ok(driveService.getAllDrivers());
     }
 

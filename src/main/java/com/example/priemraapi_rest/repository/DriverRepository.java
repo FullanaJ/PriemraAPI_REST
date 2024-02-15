@@ -2,6 +2,7 @@ package com.example.priemraapi_rest.repository;
 
 import com.example.priemraapi_rest.DTO.DriverDTO;
 import com.example.priemraapi_rest.model.Driver;
+import com.example.priemraapi_rest.projections.DriverResum;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -17,5 +18,7 @@ public interface DriverRepository extends JpaRepository<Driver, Long> {
             FROM Driver e
             """)
     List<DriverDTO> findAllDriverDTOInfo();
+
+    List<DriverResum> findAllProjectedBy();
 
 }

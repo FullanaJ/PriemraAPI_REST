@@ -3,6 +3,7 @@ package com.example.priemraapi_rest.service;
 import com.example.priemraapi_rest.DTO.DriverDTO;
 import com.example.priemraapi_rest.maper.DriverMapper;
 import com.example.priemraapi_rest.model.Driver;
+import com.example.priemraapi_rest.projections.DriverResum;
 import com.example.priemraapi_rest.repository.DriverRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,9 +24,9 @@ public class DriverServiceImpl implements DriverService {
     }
 
     @Override
-    public List<DriverDTO> getAllDrivers() {
+    public List<DriverResum> getAllDrivers() {
 
-        return driverRepository.findAllDriverDTOInfo();
+        return driverRepository.findAllProjectedBy();
     }
     public Optional<DriverDTO> getDriverByCode(String code) {
         return driverRepository.findByCodeIgnoreCase(code)
