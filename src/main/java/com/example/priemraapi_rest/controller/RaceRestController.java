@@ -23,7 +23,7 @@ public class RaceRestController {
     public ResponseEntity<List<Race>> getAllRaces(
             @RequestParam(defaultValue = "0") Integer page,
             @RequestParam(defaultValue = "10") Integer size,
-            @RequestParam(defaultValue = "id") String sortBy,
+            @RequestParam(defaultValue = "raceid") String sortBy,
             @RequestParam(defaultValue = "ASC") String sortDirection) {
         Page<Race> list = raceService.getAllRacesPaged(page, size, sortBy, sortDirection);
         return ResponseEntity.ok(list.getContent());
